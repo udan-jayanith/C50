@@ -1,0 +1,12 @@
+{% extends "network/layout.html" %} {% block body %}
+<main>
+	<div class="posts-container" data-url="{% url 'following' %}"></div>
+</main>
+{% endblock %}
+
+{% load static %}
+{% block script %}
+<script src="{% static 'network/postList.js' %}">
+</script>
+{% endblock %} 
+

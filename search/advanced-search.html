@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="//www.gstatic.com/images/branding/searchlogo/ico/favicon.ico"
+			rel="icon" />
+		<title>Google Advanced Search</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+			rel="stylesheet" />
+
+		<link rel="stylesheet" href="styles/style.css" />
+		<link rel="stylesheet" href="styles/advanced-search.css" />
+	</head>
+	<body>
+		<div class="other-search-options">
+			<h2>Advanced Search</h2>
+			<span></span>
+			<a href="/index.html">Search</a>
+			<a href="/image-search.html">Image Search</a>
+		</div>
+
+		<h4 class="find-pages-with">Find pages with...</h4>
+		<form action="https://www.google.com/search" method="GET">
+			<div class="x-container">
+				<div class="input-with-label">
+					<span>all these words:</span>
+					<input type="text" name="as_q"/>
+				</div>
+                <div class="input-with-label">
+					<span>this exact word or phrase:</span>
+					<input type="text" name="as_epq"/>
+				</div>
+                <div class="input-with-label">
+					<span>any of these words:</span>
+					<input type="text" name="as_oq"/>
+				</div>
+                <div class="input-with-label">
+					<span>none of these words:</span>
+					<input type="text" name="as_eq"/>
+				</div>
+                <button type="submit" class="advanced-search-btn">Advanced Search</button>
+			</div>
+		</form>
+	</body>
+</html>
+
+<!--
+https://www.google.com/search?as_q=foo&as_epq=moo&as_oq=noo&as_eq=loo
+-->

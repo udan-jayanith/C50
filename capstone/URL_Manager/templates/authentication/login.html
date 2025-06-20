@@ -1,0 +1,32 @@
+{% extends "layout.html" %} 
+{% load static %}
+{% block title %} 
+Login - URL Manager
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'styles/authentication/style.css' %}">
+{% endblock %}
+
+{% block body %}
+<h1>Login</h1>
+{% if message %}
+<span class="secondary">{{message}}</span>
+{% endif %}
+<form action="{% url 'login' %}" method="post" class="flex-column nogap">
+    {% csrf_token  %}
+    <div class="input-container">
+        <span>Username</span>
+        <input type="text" name="username">
+    </div>
+
+    <div class="input-container">
+        <span>Password</span>
+        <input type="password" name="password">
+    </div>
+
+    <div class="button-container">
+        <button type="submit">Done</button>
+    </div>
+</form>
+{% endblock %}

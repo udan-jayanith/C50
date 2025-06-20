@@ -1,0 +1,17 @@
+form{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input-container, .button-container{
+    box-sizing: border-box;
+    width: 100%;
+
+    input, button{
+        width: 100%;
+    }
+
+    button{
+        margin-top: 10px;
+    }
+}

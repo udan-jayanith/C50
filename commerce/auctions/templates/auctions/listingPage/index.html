@@ -1,0 +1,171 @@
+{% extends "auctions/layout.html" %} {% block body %}
+<div class="auction-item-container">
+	<article class="auction-item">
+		<img
+			src="{{item.itemImgURL}}"
+			alt="{{item.itemName}}"
+			class="auction-item-img" />
+		<div class="auction-item-info">
+			<h2 class="auction-item-name">{{item.itemName}}</h2>
+			<div class="auction-aditional-info-container">
+				<span class="owner-name margin-left"
+					>Category: <b>{{item.category}}</b></span
+				>
+				<span class="owner-name">{{item.createdDate}}</span>
+				<span class="owner-name">{{item.owner.username}}</span>
+			</div>
+
+			<p class="auction-item-description">{{item.itemDescription}}</p>
+			<span>Current Bid: {{item.currentBid}}</span>
+			<div class="bid-controls">
+				<input type="number" min="{{item.currentBid}}" class="place-bid-input"/>
+				<button class="place-bid-btn" data-url="{% url 'auctions:place-bid' item.pk %}">Place Bid</button>
+			</div>
+			<div class="button-container">
+				<button class="add-to-watchlist-btn" data-pk="{{item.pk}}" data-url="{% url 'auctions:watchlist' %}">
+					{% if isInWatchlist %}
+						Remove from Watchlist
+					{% else %}
+						Add to Watchlist
+					{% endif %}
+				</button>
+				{% if isOwner %}
+				<button data-url="{% url 'auctions:endAuction' item.pk %}" data-index = "{% url 'auctions:index' %}" class="end-auction-btn">End Auction</button>
+				{% endif %}
+			</div>
+		</div>
+	</article>
+
+	<div class="comments">
+		<h2>Comments</h2>
+		<div class="comment-input-section">
+			<textarea class="comment-input"></textarea>
+			<button
+				class="send-comment-btn"
+				data-pk="{{item.pk}}"
+				data-url="{% url 'auctions:addComment' %}">
+				Done
+			</button>
+		</div>
+		{% for comment in comments %}
+		<div class="comment">
+			<div class="comment-head">
+				<span>{{comment.commenter.username}}</span>
+			</div>
+			<div class="comment-content">{{comment.comment}}</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+
+<style>
+	.comment {
+		width: 60%;
+		min-height: 100px;
+		background-color: rgba(245, 245, 245, 0.327);
+		border: 2px solid whitesmoke;
+		box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.217);
+		box-sizing: border-box;
+	}
+
+	.comment-head {
+		height: 40px;
+		padding: 10px;
+		width: 100%;
+		box-sizing: border-box;
+		border-bottom: 2px solid whitesmoke;
+	}
+
+	.comment-content {
+		width: 100%;
+		text-wrap: pretty;
+		padding: 10px;
+		box-sizing: border-box;
+	}
+</style>
+
+<script>
+	function getCookie(name) {
+		let cookieValue = null
+		if (document.cookie && document.cookie !== '') {
+			const cookies = document.cookie.split(';')
+			for (let cookie of cookies) {
+				cookie = cookie.trim()
+				if (cookie.startsWith(name + '=')) {
+					cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+					break
+				}
+			}
+		}
+		return cookieValue
+	}
+	let csrfToken = getCookie('csrftoken')
+
+	document.querySelector('.send-comment-btn').addEventListener('click', async (e) => {
+		let pk = e.target.dataset.pk
+		let url = e.target.dataset.url
+		let value = document.querySelector('.comment-input').value
+
+		let formdata = new FormData()
+		formdata.append('pk', pk)
+		formdata.append('comment', value)
+		
+		fetch(url, {
+			body: formdata,
+			method: 'POST',
+			headers: {
+				'X-CSRFToken': csrfToken,
+			},
+		}).finally((e) => {
+			window.location.reload()
+		})
+	})
+
+	document.querySelector('.add-to-watchlist-btn').addEventListener('click', async e =>{
+		let pk = e.target.dataset.pk
+		let formdata = new FormData()
+		formdata.append('pk', pk)
+		fetch(e.target.dataset.url, {
+			method: "POST",
+			headers: {
+				'X-CSRFToken': csrfToken,
+			},
+			body: formdata
+		}).finally(()=>{
+			window.location.reload()
+		})
+	})
+
+	document.querySelector('.place-bid-btn').addEventListener('click', async(e)=>{
+		let url = e.target.dataset.url
+		let bidAmount = document.querySelector('.place-bid-input').value
+		let formdata = new FormData()
+		formdata.append('bid-amount', bidAmount)
+		
+		let req = await fetch(url, {
+			method: "POST",
+			headers: {
+				'X-CSRFToken': csrfToken,
+			},
+			body: formdata
+		})
+		let resBodyText = await req.text()
+		if (resBodyText.trim() != 'ok'){
+			alert(resBodyText)
+		}
+		window.location.reload()
+	})
+
+	document.querySelector('.end-auction-btn').addEventListener('click', async(e)=>{
+		let req = await fetch(e.target.dataset.url, {
+			headers: {
+				'X-CSRFToken': csrfToken,
+			},
+		})
+
+		let resBodyText = await req.text()
+		alert(resBodyText)
+		window.location.href = e.target.dataset.index
+	})
+</script>
+{% endblock %}

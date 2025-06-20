@@ -1,0 +1,24 @@
+{% extends "auctions/layout.html" %} {% block body %}
+
+<h2>Categories</h2>
+
+<div class="category-container">
+	<dl>
+		{% for categoryType in res %}
+		<dd><a href="{% url 'auctions:categoryFilter' categoryType %}">{{categoryType}}</a></dd>
+		{% endfor %}
+	</dl>
+</div>
+
+<style>
+    .category-container{
+        dl{
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+</style>
+{% endblock %}

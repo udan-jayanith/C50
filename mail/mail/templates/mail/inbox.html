@@ -1,0 +1,79 @@
+{% extends "mail/layout.html" %} {% load static %} {% block body %}
+<h2>{{ request.user.email }}</h2>
+
+<button
+	class="btn btn-sm btn-outline-primary"
+	id="inbox"
+	data-url="{% url 'mailbox' 'inbox' %}">
+	Inbox
+</button>
+<button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
+<button
+	class="btn btn-sm btn-outline-primary"
+	id="sent"
+	data-url="{% url 'mailbox' 'sent' %}">
+	Sent
+</button>
+<button
+	class="btn btn-sm btn-outline-primary"
+	id="archived"
+	data-url="{% url 'mailbox' 'archive' %}">
+	Archived
+</button>
+<a class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}">Log Out</a>
+<hr />
+
+<main>
+	<h3 class="mailbox-name"></h3>
+	<div id="emails-view"></div>
+
+	<div id="compose-view">
+		<h3>New Email</h3>
+		<div id="compose-form">
+			<div class="form-group">
+				From:
+				<input disabled class="form-control" value="{{ request.user.email }}" />
+			</div>
+			<div class="form-group">
+				To: <input id="compose-recipients" class="form-control" />
+			</div>
+			<div class="form-group">
+				<input
+					class="form-control"
+					id="compose-subject"
+					placeholder="Subject" />
+			</div>
+			<textarea
+				class="form-control"
+				id="compose-body"
+				placeholder="Body"></textarea>
+			<input type="submit" class="btn btn-primary send-btn" />
+		</div>
+	</div>
+
+	<div class="view-email">
+		<h4 class="email-subject">Subject</h4>
+		<div class="email-info">
+			<span class="email-sender">udan@gamil.com</span>
+			<span class="email-timestamp">Jun 07 2025, 07:23 AM</span>
+			<button class="archive-state-btn">Archive</button>
+		</div>
+		<div class="recipients">
+			<span class="to">To: </span>
+			<div class="recipient-list">
+			</div>
+		</div>
+        <hr>
+		<p class="email-body">
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente quae
+			laboriosam ipsum numquam voluptate, eaque veritatis reprehenderit,
+			laudantium aut omnis dolore quisquam cum adipisci repudiandae fuga quas
+			odio facere. Veritatis!
+		</p>
+		<button class="reply-btn">Reply</button>
+	</div>
+</main>
+
+{% endblock %} {% block script %}
+<script src="{% static 'mail/inbox.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "network/layout.html" %} {% block body %}
+<main style="width: 100%" data-pk="{{profile.user.pk}}">
+	<div class="card text-left" style="width: 100%; margin-bottom: 40px;">
+		<div
+			class="card-body"
+			style="
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: flex-start;
+				gap: 10px;
+			">
+			<h2 class="card-title">{{profile.user.username}}</h2>
+			<div style="display: flex; justify-content: flex-start; align-items: center; gap: 10px; margin-top: auto; width: 100%;">
+                {% if not isOwner and user.is_authenticated %}
+                <button type="button" class="btn btn-primary follow-btn" data-url="{% url 'follow' %}" data-following-pk="{{profile.user.pk}}">
+					{% if followed %}
+					Unfollow
+					{% else %}
+					Follow
+					{% endif %}
+				</button>
+                {% endif %}
+
+				<span class="text-body-secondary" style="margin-left: auto;"
+					>Following: {{profile.followingCount}}</span
+				>
+				<span class="text-body-secondary followers-count">Followers: {{profile.followersCount}}</span>
+			</div>
+		</div>
+	</div>
+
+    <div class="posts-container" data-url="/getPosts/{{profile.user.pk}}"></div>
+
+	<nav aria-label="...">
+		<ul class="pagination">
+			<li class="page-item">
+				<button class="page-link previous-btn">Previous</button>
+			</li>
+			<li class="page-item">
+				<button class="page-link next-btn">Next</button>
+			</li>
+		</ul>
+	</nav>
+</main>
+{% endblock %} {% load static %} 
+{% block script %} 
+<script src="{% static 'network/postList.js' %}">
+</script>
+<script src="{% static 'network/userpage.js' %}">
+</script>
+{% endblock %}

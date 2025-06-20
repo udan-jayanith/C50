@@ -1,0 +1,116 @@
+{% extends 'layout.html' %} {% block title %} URL Manager {% endblock %} {% load static %} 
+{% block styles %}
+<link rel="stylesheet" href="{% static 'styles/libraries/library.css' %}" />
+{% endblock %} {% block body %}
+
+<article class="library-header flex-column nogap">
+	<div class="heading-container">
+		<h1 class="library-name">{{library.libraryName}}</h1>
+		{% if library.ownerPk == user.pk %}
+		<button class="library-settings-option auto-left flex-column-center">
+			<i class="fa-solid fa-gear"></i>
+		</button>
+		{% endif %}
+	</div>
+	{% if library.libraryDescription %}
+	<p class="library-description">{{library.libraryDescription}}</p>
+	{% endif %}
+
+	<div class="flex-row visibility-container">
+		<div class="flex-row">
+			<div class="flex-row nogap">
+				<span class="visibility-keyword secondary">Visibility: </span>
+				<span class="visibility-mod secondary">{{library.visibility}}</span>
+			</div>
+			<div class="flex-row nogap">
+				<span class="username-metaTag secondary">Username: </span>
+				<a class="username-metadata secondary creator link" href="{% url 'libraries' library.ownerPk %}">{{library.ownerUsername}}</a>
+			</div>
+		</div>
+	</div>
+</article>
+
+<hr />
+
+{% if library.ownerPk == user.pk %}
+<div class="url-form flex-column url-form-container">
+	<div class="input-container">
+		<span>Title</span>
+		<input type="text" class="url-title"/>
+		<span>URL</span>
+		<input type="url" class="website-url"/>
+	</div>
+	<div class="button-container">
+		<button class="add-url-item-btn"><i class="fa-solid fa-square-plus"></i> Add</button>
+	</div>
+</div>
+<hr />
+{% endif %}
+
+<div class="url-list-container" data-library-pk="{{ library.libraryPk }}">
+	<template id="url-item-template">
+		<div class="url-item">
+			<img src="#" alt="favicon" class="url-item-ico" />
+			<div class="url-data-container">
+				<a href="#" class="url-title"></a>
+				<span class="url-timestamp"></span>
+			</div>
+			{% if library.ownerPk == user.pk %}
+			<i class="fa-solid fa-gear auto-left more-options-ico settings-option"></i>
+			{% endif %}
+		</div>
+	</template>
+</div>
+
+<dialog class="url-item-settings-dialog"> 
+	<template class="url-item-settings-template">
+		<div class="flex-column url-item-settings">
+			<div class="input-container full-width">
+				<span>Title</span>
+				<input type="text" class="full-width url-item-setting-title">
+	
+				<span>URL</span>
+				<input type="url" class="full-width url-item-setting-url">
+			</div>
+	
+			<div class="button-container">
+				<button class="url-item-setting-done-btn">Done</button>
+				<button class="url-item-setting-cancel-btn">Cancel</button>
+				<button class="url-item-setting-delete-btn">Delete</button>
+			</div>
+		</div>
+	</template>
+</dialog>
+
+<dialog class="library-settings-option-dialog"> 
+	<template class="library-settings-option-dialog-content-template">
+		<div class="library-settings-option-dialog-content">
+			<div class="input-container">
+				<span>Library Name</span>
+				<input type="text" class="library-name-input"/>
+			</div>
+			<div class="input-container">
+				<span>Library Description</span>
+				<textarea type="text" class="library-description-input"></textarea>
+			</div>
+		
+			<div class="input-container">
+				<span>Visibility</span>
+				<select id="visibility" class="library-visibility-mod-input">
+					<option value="private">Private</option>
+					<option value="public">Public</option>
+				</select>
+			</div>
+		
+			<div class="button-container">
+				<button class="done-library-btn"><i class="fa-solid fa-square-plus"></i> Done</button>
+				<button class="library-close-dialog-btn">Cancel</button>
+				<button class="delete-library-btn">Delete</button>
+			</div>
+		</div>
+	</template>
+</dialog>
+
+{% endblock %} {% block scripts %}
+<script src="{% static 'scripts/libraries/library.js' %}"></script>
+{% endblock %}

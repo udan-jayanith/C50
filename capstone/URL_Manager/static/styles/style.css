@@ -1,0 +1,246 @@
+:root {
+	--rosewater: #dc8a78;
+	--flamingo: #dd7878;
+	--pink: #ea76cb;
+	--mauve: #8839ef;
+	--red: #d20f39;
+	--maroon: #e64553;
+	--peach: #fe640b;
+	--yellow: #df8e1d;
+	--green-hover: #a6d189;
+	--green: #a6da95;
+	--teal: #179299;
+	--sky: #04a5e5;
+	--sapphire: #209fb5;
+	--blue: #1e66f5;
+	--lavender: #7287fd;
+	--text: #11111b;
+	--subtext-1: #414559;
+	--subtext-0: #6c6f85;
+	--overlay-2: #7c7f93;
+	--overlay-1: #8c8fa1;
+	--overlay-0: #9ca0b0;
+	--surface-2: #acb0be;
+	--surface-1: #bcc0cc;
+	--surface-0: #ccd0da;
+	--base: #eff1f5;
+	--base-2: #fcfcfd;
+	--mantle: #e6e9ef;
+	--crust: #dce0e8;
+}
+
+* {
+	scrollbar-width: thin; /* auto | thin | none */
+	scrollbar-color: var(--base) var(--mantle); /* thumb color track color */
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	font-family: 'Roboto', sans-serif;
+	font-optical-sizing: auto;
+	background-color: var(--base);
+	color: var(--text);
+
+	padding: 0px;
+	margin: 0px;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.body-content {
+	width: 40vw;
+	height: 100%;
+	overflow-y: scroll;
+	padding: 0px;
+	padding-bottom: 10px;
+
+	font-size: 16px;
+	font-family: 'Roboto', sans-serif;
+	font-optical-sizing: auto;
+	color: var(--text);
+	position: relative;
+	box-sizing: border-box;
+}
+
+input,
+textarea,
+button {
+	box-sizing: border-box;
+	border-radius: 10px;
+	padding: 8px 10px;
+	font-size: 16px;
+	font-family: 'Roboto', sans-serif;
+	font-optical-sizing: auto;
+	color: var(--text);
+	outline: none;
+	border: 1px solid var(--subtext-1);
+	background-color: var(--base-2);
+}
+
+select{
+	appearance: none;
+	box-sizing: border-box;
+	border-radius: 10px;
+	padding: 8px 10px;
+	font-size: 16px;
+	font-family: 'Roboto', sans-serif;
+	font-optical-sizing: auto;
+	color: var(--text);
+	outline: none;
+	border: 1px solid var(--subtext-1);
+	background-color: var(--base-2);
+}
+
+option{
+	box-sizing: border-box;
+	border-radius: 10px;
+	padding: 8px 10px;
+	font-size: 16px;
+	font-family: 'Roboto', sans-serif;
+	font-optical-sizing: auto;
+	color: var(--text);
+	outline: none;
+	border: 1px solid var(--subtext-1);
+	background-color: var(--base-2);
+}
+
+a{
+	color: var(--mauve);
+}
+
+button:hover {
+	background-color: var(--base);
+}
+
+dialog{
+	border: 1px solid var(--subtext-1);
+	background-color: var(--base);
+	border-radius: 10px;
+
+	width: 40vw;
+	padding: 10px;
+}
+
+.primary-btn {
+	background-color: var(--green);
+	font-weight: bold;
+	&:hover {
+		background-color: var(--green-hover);
+	}
+}
+
+.input-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+
+	span {
+		font-size: small;
+		margin-left: 2px;
+		margin-top: 10px;
+	}
+}
+
+.button-container {
+	& > :first-child {
+		background-color: var(--green);
+		font-weight: bold;
+		&:hover {
+			background-color: var(--green-hover);
+		}
+	}
+}
+
+.flex-column-center {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+
+.flex-column {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 10px;
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.flex-row-center {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.nowrap {
+	flex-wrap: nowrap;
+}
+
+.nogap {
+	gap: 0px;
+}
+
+.auto-left {
+	margin-left: auto;
+	margin-right: 10px;
+}
+
+.thin-border {
+	border: 1px solid var(--subtext-1);
+}
+
+.secondary {
+	color: var(--subtext-1);
+	font-size: small;
+}
+
+hr {
+	border: none;
+	outline: 1px solid var(--subtext-1);
+	width: 100%;
+	margin: 16px 0px;
+}
+
+.full-width{
+		width: 100%;
+}
+
+h1{
+	font-size: 34px;
+	margin-bottom: 2px;
+	margin-top: 10px;
+}
+
+.link{
+	&:hover{
+		text-decoration: underline;
+	}
+}
+
+@media (orientation: portrait){
+	.body-content{
+		width: 100%;
+		padding: 10px;
+	}
+
+	dialog{
+		width: 100%;
+	}
+}

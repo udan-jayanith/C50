@@ -1,0 +1,32 @@
+{% extends 'layout.html' %} 
+{% load static %} 
+{% block title %}
+ Public Libraries- URL Manager 
+ {%endblock %} 
+ {%block styles %}
+<link rel="stylesheet" href="{% static 'styles/libraries/libraries.css' %}" />
+{% endblock %} {% block body %}
+<h1>
+	Public Libraries
+</h1>
+
+<div class="libraries-list-container">
+	<template class="library-item-template">
+		<div class="library-item">
+			<a class="library-name" href="#">My Urls</a>
+			<div class="library-metadata-container">
+				<div class="library-metadata">
+					<span>Visibility: </span>
+					<span class="visibility-mod">private</span>
+				</div>
+				<div class="library-metadata">
+					<span>Creator:</span>
+					<a class="creator secondary link">Udan</a>
+				</div>
+			</div>
+		</div>
+	</template>
+</div>
+{% endblock %} {% block scripts %}
+<script src="{% static 'scripts/libraries/libraries.js' %}"></script>
+{% endblock %}

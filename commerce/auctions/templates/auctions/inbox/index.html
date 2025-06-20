@@ -1,0 +1,6 @@
+{% extends "auctions/layout.html" %} {% block body %}
+<h2>Inbox</h2>
+{% for item in myInbox %}
+<p>{{item.message}}</p>
+{% endfor %}
+{% endblock %}

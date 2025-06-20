@@ -1,0 +1,38 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+    Add listing
+{% endblock %}
+
+{% block body %}
+<h2>Add Listing</h2>
+    <form action="{% url 'auctions:addListing' %}" method="post">
+        {% csrf_token %}
+        <div class="input-field">
+            <span>Item name</span>
+            <input type="text" name="item-name">
+        </div>
+
+        <div class="input-field">
+            <span>Item image URL</span>
+            <input type="url" name="item-img-url">
+        </div>
+
+        <div class="input-field">
+            <span>Item description</span>
+            <textarea type="text" name="item-description"></textarea>
+        </div>
+
+        <div class="input-field">
+            <span>category</span>
+            <input type="text" name="category">
+        </div>
+
+        <div class="input-field">
+            <span>Starting bid</span>
+            <input type="number" name="starting-bid">
+        </div>
+        
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}

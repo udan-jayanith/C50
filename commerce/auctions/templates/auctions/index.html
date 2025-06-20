@@ -1,0 +1,24 @@
+{% extends "auctions/layout.html" %} {% block body %}
+<h2>Active Listings</h2>
+
+<div class="listing-container">
+	{% for item in listings %}
+	<article class="listing-item">
+		<img src="{{item.itemImgURL}}" alt="{{item.itemName}}" class="item-img"/>
+		<div class="item-info">
+			<h3 class="auction-item-heading"><a href="{% url 'auctions:listing' item.pk %}">{{item.itemName}}</a></h3>
+			<p class="item-description">{{item.itemDescription}}</p>
+			
+			<footer>
+                <span>Current Bid: <b>{{item.currentBid}}</b></span>
+
+				<span class="margin-left">category: <b>{{item.category}}</b></span>
+				<span>{{item.createdDate}}</span>
+				<span class="owner" href="#">{{item.owner.username}}</span>
+			</footer>
+		</div>
+	</article>
+	{% endfor %}
+</div>
+
+{% endblock %}

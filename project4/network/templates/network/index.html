@@ -1,0 +1,53 @@
+{% extends "network/layout.html" %} {% block body %}
+
+{% if user.is_authenticated %}
+<div class="mb-3">
+	<label for="exampleFormControlTextarea1" class="form-label"
+		>Example textarea</label
+	>
+	<textarea
+		class="form-control new-post-textarea"
+		id="exampleFormControlTextarea1"
+		rows="3"
+		placeholder="What's on your mind."></textarea>
+	<div class="mb-3">
+		<label for="exampleFormControlInput1" class="form-label">Image URL</label>
+		<input
+			type="url"
+			class="form-control new-post-img-url"
+			id="exampleFormControlInput1"
+			placeholder="https://www.unshplash.com/network.jpg" />
+	</div>
+
+	<button class="btn btn-primary mb-3 add-post" data-url="{% url 'addPost' %}" data-profile="{% url 'userpage' pk %}">
+		Post
+	</button>
+</div>
+{% endif %}
+
+<hr class="hr" />
+
+<main>
+	<div class="posts-container" data-url="/getPosts"></div>
+
+	<nav aria-label="...">
+		<ul class="pagination">
+			<li class="page-item">
+				<button class="page-link previous-btn">Previous</button>
+			</li>
+			<li class="page-item">
+				<button class="page-link next-btn">Next</button>
+			</li>
+		</ul>
+	</nav>
+</main>
+{% endblock %}
+
+{% load static %}
+{% block script %}
+<script src="{% static 'network/postList.js' %}">
+</script>
+<script src="{% static 'network/allPosts.js' %}">
+</script>
+{% endblock %} 
+

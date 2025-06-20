@@ -1,0 +1,21 @@
+{% extends "encyclopedia/layout.html" %} 
+
+
+{% block title %} 
+{{title}} 
+{% endblock%} 
+
+
+
+{% block body %} 
+
+<article>
+	{{content|safe}}
+</article>
+<hr />
+<footer>
+	<span>Last modified time: {{lastModifiedDate}}</span>
+	<a href="{% url 'encyclopedia:edit-wiki' title=title %}">Edit this entry.</a>
+</footer>
+
+{% endblock %}

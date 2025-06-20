@@ -1,0 +1,19 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Create a new page
+{% endblock %}
+
+{% block body %}
+    <h2>Write your markdowns below.</h2>
+    <form class="create-new-page-body" method="post" action="{% url 'encyclopedia:createNewPage' %}">
+        {% csrf_token %}
+        <div class="input-field">
+            <span title="This is helpful for searching. Add many words as you can">Page name :</span>
+            <input type="text" name="title">
+        </div>
+        <h4>Write your content down hear in <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax">github markdown</a>.</h4>
+        <textarea name="content"></textarea>
+        <button class="save-btn" type="submit">Save</button>
+    </form>
+{% endblock %}
