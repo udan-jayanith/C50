@@ -18,7 +18,7 @@ On top of that, I integrated two external libraries for web scraping functionali
 
 The web app is mobile responsive, tested with Chrome DevTools, and has a unique interface tailored specifically for this project.
 
-On the frontend, I implemented infinite scrolling, allowing new content to load seamlessly as the user scrolls (no button clicking needed). I also used HTML templates and the built-in <dialog> element, which are relatively modern features in HTML and JavaScript.
+On the frontend, I implemented infinite scrolling, allowing new content to load seamlessly as the user scrolls (no button clicking needed). I also used HTML templates and the built-in dialog element, which are relatively modern features in HTML and JavaScript.
 
 This project also has a status bar that appears when there's a onging http reqeust to the backend.
 
